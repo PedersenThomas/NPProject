@@ -50,7 +50,38 @@ namespace Hardproblems
         private bool IsValidSolution(Dekoder instance, Dictionary<char, string> variablesAssigned)
         {
             //TODO implement
-            return false;
+            foreach (String t in instance.T)
+            {
+                foreach (char letter in t)
+                {
+                    if (letter >= 'A' && letter <= 'Z' && variablesAssigned.ContainsKey(letter))
+                    {
+                        t.Replace(letter.ToString(), variablesAssigned[letter]);
+                    }
+                }
+
+                if (!instance.S.Contains(t))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
+
+        //private bool FindSubstringInString(Dekoder instance, String substring)
+        //{
+        //    for (int i = 0; i < instance.S.Length - substring.Length; i++)
+        //    {
+        //        for (int j = 0; j < substring.Length; j++)
+        //        {
+        //            if (instance.S[i + j] != substring[j])
+        //            {
+        //                break;
+        //            }
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
     }
 }
