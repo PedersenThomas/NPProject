@@ -17,6 +17,8 @@ namespace Hardproblems
             //throw new NotImplementedException();
         }
 
+        
+
         private Dictionary<char, string> Solve(Dekoder instance, Dictionary<char, string> variablesAssigned)
         {
             if (variablesAssigned.Keys.Count == instance.GammaAlphabet.Count)

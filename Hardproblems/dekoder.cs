@@ -80,7 +80,8 @@ namespace Hardproblems
                         
                     }
                 }
-                T.Add(line);
+                if(!T.Contains(line))
+                    T.Add(line);
             }
 
             R = new Dictionary<char, List<string>>();
