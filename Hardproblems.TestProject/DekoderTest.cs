@@ -11,8 +11,10 @@ namespace Hardproblems.TestProject
     [TestClass]
     public class DekoderTest
     {
+        private const int second = 1000;
+        private const int minute = 60*second;
         //In miliseconds
-        private const int Timeout = 120000;
+        private const int Timeout = 30 * minute;
 
         [TestMethod]
         public void DekoderTest_ReferenceProblem()
@@ -41,7 +43,6 @@ E:aa,bd,c,d,e";
             {
                 {'A', new List<string> { "a", "b", "d", "e", "dd" }},
                 {'B', new List<string> { "a", "b", "d", "e", "dd" }},
-                {'C', new List<string> { "a", "b", "d", "e", "dd" }},
                 {'D', new List<string> { "a", "b", "d", "e", "dd" }},
                 {'E', new List<string> { "bd", "d", "e"}}
             };
@@ -65,42 +66,48 @@ E:aa,bd,c,d,e";
         public void SolveFile_test01()
         {
             string filename = "testset/test01.SWE";
-            runSolverFromFile(filename);
+            var solution = runSolverFromFile(filename);
+            Assert.IsNull(solution);
         }
 
         [TestMethod, Timeout(Timeout)]
         public void SolveFile_test02()
         {
             string filename = "testset/test02.SWE";
-            runSolverFromFile(filename);
+            var solution = runSolverFromFile(filename);
+            Assert.IsNotNull(solution);
         }
 
         [TestMethod, Timeout(Timeout)]
         public void SolveFile_test03()
         {
             string filename = "testset/test03.SWE";
-            runSolverFromFile(filename);
+            var solution = runSolverFromFile(filename);
+            Assert.IsNull(solution);
         }
 
         [TestMethod, Timeout(Timeout)]
         public void SolveFile_test04()
         {
             string filename = "testset/test04.SWE";
-            runSolverFromFile(filename);
+            var solution = runSolverFromFile(filename);
+            Assert.IsNotNull(solution);
         }
 
         [TestMethod, Timeout(Timeout)]
         public void SolveFile_test05()
         {
             string filename = "testset/test05.SWE";
-            runSolverFromFile(filename);
+            var solution = runSolverFromFile(filename);
+            Assert.IsNull(solution);
         }
 
         [TestMethod, Timeout(Timeout)]
         public void SolveFile_test06()
         {
             string filename = "testset/test06.SWE";
-            runSolverFromFile(filename);
+            var solution = runSolverFromFile(filename);
+            Assert.IsNotNull(solution);
         }
 
         private Dictionary<char, string> runSolverFromFile(string filename)
@@ -109,7 +116,6 @@ E:aa,bd,c,d,e";
             dekoder.ReadFromFile(filename);
             Solver solver = new Solver();
             var solution = solver.Solve(dekoder);
-            Assert.IsNotNull(solution);
             return solution;
         }
 
@@ -137,7 +143,7 @@ E:aa,bd,c,d,e";
 
         private void RDictionariesAreEqual(Dictionary<char, List<string>> expected, Dictionary<char, List<string>> actual)
         {
-            CollectionAssert.AreEqual(expected.Keys, actual.Keys);
+            CollectionAssert.AreEqual(expected.Keys, actual.Keys, "Expected: {0} -> Actual: {1}", String.Join(",", expected.Keys), String.Join(",", actual.Keys));
             foreach (KeyValuePair<char, List<string>> pair in expected)
             {
                 CollectionAssert.AreEqual(pair.Value, actual[pair.Key]);
