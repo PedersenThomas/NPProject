@@ -81,7 +81,7 @@ namespace Hardproblems
                     }
                 }
                 if(!T.Contains(line))
-                    T.Add(line);
+                    T.Add(line); 
             }
 
             R = new Dictionary<char, List<string>>();
@@ -114,7 +114,16 @@ namespace Hardproblems
                         throw new FormatException("The R set items have letter outside the sigma & gamma alphabet. Value: \"" + value + "\"");
                     }
                 }
-                R[index] = values;
+
+                foreach (string t in T) // removing R which are not in Ts
+                {
+                    if (t.Contains(index))
+                    {
+                        R[index] = values;
+                        break;
+                    }
+                }
+                //R[index] = values;
             }
             //Checks that every found R key in T, do exsists in R.
             foreach (char letter in foundGammaLetters)
