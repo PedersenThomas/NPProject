@@ -11,7 +11,7 @@ namespace Hardproblems
         static void Main(string[] args)
         {
             Dekoder instance = new Dekoder();
-            instance.ReadFromFile(string.Format("testset/test{0:D2}.SWE",7));
+            instance.ReadFromFile(string.Format("testset/test{0:D2}.SWE",2));
             Solver s = new Solver();
             Dictionary<char, string> solution =  s.Solve(instance);
 

@@ -13,10 +13,7 @@ namespace Hardproblems
             Dictionary<char, string> solution = Solve(instance, new Dictionary<char, string>());
 
             return solution;
-            //TODO need implementation.
-            //throw new NotImplementedException();
         }
-
         
 
         private Dictionary<char, string> Solve(Dekoder instance, Dictionary<char, string> variablesAssigned)
@@ -51,7 +48,6 @@ namespace Hardproblems
 
         private bool IsValidSolution(Dekoder instance, Dictionary<char, string> variablesAssigned)
         {
-            //TODO implement
             foreach (String t in instance.T)
             {
                 String replacedT = String.Copy(t);

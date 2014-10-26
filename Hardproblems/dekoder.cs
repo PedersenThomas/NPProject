@@ -80,8 +80,9 @@ namespace Hardproblems
                         
                     }
                 }
-                if(!T.Contains(line))
+                if (!T.Contains(line)) {
                     T.Add(line);
+                }
             }
 
             R = new Dictionary<char, List<string>>();
@@ -102,7 +103,7 @@ namespace Hardproblems
                 {
                     throw new FormatException("The same Key for one of the R sets, is present multiple times. Key: " + index);
                 }
-                List<string> values = line.Substring(2).Split(',').Select(s => s.Trim()).ToList();
+                List<string> values = line.Substring(2).Split(',').Select(s => s.Trim()).Where(s => S.Contains(s)).ToList();
                 if (values.Distinct().Count() != values.Count())
                 {
                     throw new FormatException("The Rs should be an set. Values: " + line.Substring(2));

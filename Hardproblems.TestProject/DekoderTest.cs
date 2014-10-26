@@ -11,6 +11,9 @@ namespace Hardproblems.TestProject
     [TestClass]
     public class DekoderTest
     {
+        //In miliseconds
+        private const int Timeout = 120000;
+
         [TestMethod]
         public void DekoderTest_ReferenceProblem()
         {
@@ -36,11 +39,11 @@ E:aa,bd,c,d,e";
 
             var dict = new Dictionary<char, List<string>>
             {
-                {'A', new List<string> { "a", "b", "c", "d", "e", "f", "dd" }},
-                {'B', new List<string> { "a", "b", "c", "d", "e", "f", "dd" }},
-                {'C', new List<string> { "a", "b", "c", "d", "e", "f", "dd" }},
-                {'D', new List<string> { "a", "b", "c", "d", "e", "f", "dd" }},
-                {'E', new List<string> { "aa", "bd", "c", "d", "e"}}
+                {'A', new List<string> { "a", "b", "d", "e", "dd" }},
+                {'B', new List<string> { "a", "b", "d", "e", "dd" }},
+                {'C', new List<string> { "a", "b", "d", "e", "dd" }},
+                {'D', new List<string> { "a", "b", "d", "e", "dd" }},
+                {'E', new List<string> { "bd", "d", "e"}}
             };
             Debug.WriteLine("{0}:{1}", dict.First().Key, ListToString(dict.First().Value));
             RDictionariesAreEqual(dict, dekoder.R);
@@ -56,6 +59,58 @@ E:aa,bd,c,d,e";
                 dekoder.ReadFromFile(filename);
                 Assert.IsNotNull(dekoder.S);
             }
+        }
+
+        [TestMethod, Timeout(Timeout)]
+        public void SolveFile_test01()
+        {
+            string filename = "testset/test01.SWE";
+            runSolverFromFile(filename);
+        }
+
+        [TestMethod, Timeout(Timeout)]
+        public void SolveFile_test02()
+        {
+            string filename = "testset/test02.SWE";
+            runSolverFromFile(filename);
+        }
+
+        [TestMethod, Timeout(Timeout)]
+        public void SolveFile_test03()
+        {
+            string filename = "testset/test03.SWE";
+            runSolverFromFile(filename);
+        }
+
+        [TestMethod, Timeout(Timeout)]
+        public void SolveFile_test04()
+        {
+            string filename = "testset/test04.SWE";
+            runSolverFromFile(filename);
+        }
+
+        [TestMethod, Timeout(Timeout)]
+        public void SolveFile_test05()
+        {
+            string filename = "testset/test05.SWE";
+            runSolverFromFile(filename);
+        }
+
+        [TestMethod, Timeout(Timeout)]
+        public void SolveFile_test06()
+        {
+            string filename = "testset/test06.SWE";
+            runSolverFromFile(filename);
+        }
+
+        private Dictionary<char, string> runSolverFromFile(string filename)
+        {
+            Dekoder dekoder = new Dekoder();
+            dekoder.ReadFromFile(filename);
+            Solver solver = new Solver();
+            var solution = solver.Solve(dekoder);
+            Assert.IsNotNull(solution);
+            return solution;
         }
 
         [TestMethod]
