@@ -57,7 +57,7 @@ namespace Hardproblems
                 {
                     if (letter >= 'A' && letter <= 'Z' && variablesAssigned.ContainsKey(letter))
                     {
-                        replacedT.Replace(letter.ToString(), variablesAssigned[letter]);
+                        replacedT = replacedT.Replace(letter.ToString(), variablesAssigned[letter]);
                     }
                 }
 
