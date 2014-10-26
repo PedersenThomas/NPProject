@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -54,6 +55,23 @@ E:aa,bd,c,d,e";
                 Dekoder dekoder = new Dekoder();
                 dekoder.ReadFromFile(filename);
                 Assert.IsNotNull(dekoder.S);
+            }
+        }
+
+        [TestMethod]
+        public void SimpleValid()
+        {
+            string filename = "testset/test07.SWE";
+            Dekoder instance = new Dekoder();
+            instance.ReadFromFile(filename);
+            Solver s = new Solver();
+            var solution = s.Solve(instance);
+
+            Assert.IsNotNull(solution);
+
+            foreach (KeyValuePair<char, List<string>> keyValuePair in instance.R)
+            {
+                Debug.WriteLine("{0}: {1}", keyValuePair.Key, String.Join(",", keyValuePair.Value));
             }
         }
 
