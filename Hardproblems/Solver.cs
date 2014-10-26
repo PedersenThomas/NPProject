@@ -8,11 +8,11 @@ namespace Hardproblems
 {
     public class Solver
     {
-        public List<string> Solve(Dekoder instance)
+        public Dictionary<char, string> Solve(Dekoder instance)
         {
-            Solve(instance, new Dictionary<char, string>());
+            Dictionary<char, string> solution = Solve(instance, new Dictionary<char, string>());
 
-            return null;
+            return solution;
             //TODO need implementation.
             //throw new NotImplementedException();
         }
@@ -52,36 +52,21 @@ namespace Hardproblems
             //TODO implement
             foreach (String t in instance.T)
             {
-                foreach (char letter in t)
+                String replacedT = String.Copy(t);
+                foreach (char letter in replacedT)
                 {
                     if (letter >= 'A' && letter <= 'Z' && variablesAssigned.ContainsKey(letter))
                     {
-                        t.Replace(letter.ToString(), variablesAssigned[letter]);
+                        replacedT.Replace(letter.ToString(), variablesAssigned[letter]);
                     }
                 }
 
-                if (!instance.S.Contains(t))
+                if (!instance.S.Contains(replacedT))
                 {
                     return false;
                 }
             }
             return true;
         }
-
-        //private bool FindSubstringInString(Dekoder instance, String substring)
-        //{
-        //    for (int i = 0; i < instance.S.Length - substring.Length; i++)
-        //    {
-        //        for (int j = 0; j < substring.Length; j++)
-        //        {
-        //            if (instance.S[i + j] != substring[j])
-        //            {
-        //                break;
-        //            }
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
     }
 }
