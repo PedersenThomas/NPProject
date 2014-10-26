@@ -10,24 +10,41 @@ namespace Hardproblems
     {
         public List<string> Solve(Dekoder instance)
         {
-            solve(instance, new Dictionary<char, string>());
+            Solve(instance, new Dictionary<char, string>());
 
+            return null;
             //TODO need implementation.
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
-        private void solve(Dekoder instance, Dictionary<char, string> variablesAssigned)
+        private Dictionary<char, string> Solve(Dekoder instance, Dictionary<char, string> variablesAssigned)
         {
-            foreach (char variable in instance.GammaAlphabet)
+            if (variablesAssigned.Keys.Count == instance.GammaAlphabet.Count)
             {
-                if (!variablesAssigned.ContainsKey(variable))
+                if (IsValidSolution(instance, variablesAssigned))
                 {
-                    foreach (string RItem in instance.R[variable])
+                    return variablesAssigned;
+                }
+            }
+            else
+            {
+                char variable = instance.GammaAlphabet[variablesAssigned.Count];
+                if (variablesAssigned.ContainsKey(variable))
+                {
+                    throw new Exception("Picked variable does already exists in the assignedVariables. This should never happen.");
+                }
+                foreach (string RItem in instance.R[variable])
+                {
+                    Dictionary<char, string> changedDictionary = new Dictionary<char, string>(variablesAssigned);
+                    changedDictionary[variable] = RItem;
+                    var solution = Solve(instance, changedDictionary);
+                    if (solution != null)
                     {
-                        variablesAssigned[variable] = RItem;
+                        return solution;
                     }
                 }
             }
+            return null;
         }
 
         private bool IsValidSolution(Dekoder instance, Dictionary<char, string> variablesAssigned)
