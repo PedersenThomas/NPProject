@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hardproblems
 {
@@ -32,10 +29,10 @@ namespace Hardproblems
                 {
                     throw new Exception("Picked variable does already exists in the assignedVariables. This should never happen.");
                 }
-                foreach (string RItem in instance.R[variable])
+                foreach (string rItem in instance.R[variable])
                 {
                     Dictionary<char, string> changedDictionary = new Dictionary<char, string>(variablesAssigned);
-                    changedDictionary[variable] = RItem;
+                    changedDictionary[variable] = rItem;
                     var solution = Solve(instance, changedDictionary);
                     if (solution != null)
                     {

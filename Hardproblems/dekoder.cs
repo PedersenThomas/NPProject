@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Hardproblems
 {
     public class Dekoder
     {
-        public List<string> T { get; set; }
-        public Dictionary<char,List<string>> R { get; set; }
-        public string S { get; set; }
+        public List<string> T { get; private set; }
+        public Dictionary<char,List<string>> R { get; private set; }
+        public string S { get; private set; }
 
         public List<char> GammaAlphabet
         {
