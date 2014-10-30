@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Hardproblems
 {
@@ -7,25 +9,30 @@ namespace Hardproblems
     {
         static void Main(string[] args)
         {
+            string filename = Console.ReadLine();
             Dekoder instance = new Dekoder();
-            instance.ReadFromStdIn();
+            instance.ReadFromFile(filename);
             Solver s = new Solver();
-            Dictionary<char, string> solution =  s.Solve(instance);
+            Dictionary<char, string> solution = s.Solve(instance);
 
             if (solution != null)
             {
-                //Console.WriteLine("YES");
-                foreach (KeyValuePair<char, string> solutionPair in solution)
-	            {
-                    Console.WriteLine(solutionPair.Key + ":" + solutionPair.Value);
-	            }
+                string solutionFile = filename.Replace(".SWE", ".SOL");
+                List<char> gamma = instance.RefereceR.Keys.ToList();
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(solutionFile))
+                {
+                    foreach (char key in gamma)
+                    {
+                        string value = solution.ContainsKey(key) ? solution[key] : instance.RefereceR[key].First();
+                        file.WriteLine("{0}:{1}", key, value);
+                    }
+                }
+                Console.WriteLine("YES");
             }
             else
             {
                 Console.WriteLine("NO");
             }
-
-            //Console.ReadLine();
         }
     }
 }

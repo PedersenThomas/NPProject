@@ -9,7 +9,8 @@ namespace Hardproblems
     public class Dekoder
     {
         public List<string> T { get; private set; }
-        public Dictionary<char,List<string>> R { get; private set; }
+        public Dictionary<char, List<string>> R { get; private set; }
+        public Dictionary<char, List<string>> RefereceR { get; private set; }
         public string S { get; private set; }
 
         public List<char> GammaAlphabet
@@ -181,6 +182,7 @@ namespace Hardproblems
                 }
             }
 
+            RefereceR = new Dictionary<char, List<string>>();
             R = new Dictionary<char, List<string>>();
             //Reads the Rs.
             for (int i = 2+numK; i < lines.Length; i++)
@@ -212,6 +214,8 @@ namespace Hardproblems
                     }
                 }
 
+                RefereceR[index] = values;
+
                 foreach (string t in T) // removing R which are not in Ts
                 {
                     if (t.Contains(index))
@@ -220,7 +224,6 @@ namespace Hardproblems
                         break;
                     }
                 }
-                //R[index] = values;
             }
             //Checks that every found R key in T, do exsists in R.
             foreach (char letter in foundGammaLetters)
