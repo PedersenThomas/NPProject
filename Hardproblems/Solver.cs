@@ -15,6 +15,14 @@ namespace Hardproblems
 
         private Dictionary<char, string> Solve(Dekoder instance, Dictionary<char, string> variablesAssigned)
         {
+            foreach (string stringT in instance.T) // Check if all T string have length less that S
+            {
+                if (stringT.Length > instance.S.Length)
+                {
+                    return null;
+                }
+            }
+            
             if (variablesAssigned.Keys.Count == instance.GammaAlphabet.Count)
             {
                 if (IsValidSolution(instance, variablesAssigned))
